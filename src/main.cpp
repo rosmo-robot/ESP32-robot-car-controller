@@ -3,12 +3,11 @@
 #include <WiFiClientSecure.h>
 #include <AsyncTCP.h>
 #include <ESPAsyncWebServer.h>
-
 #include "utility.h"
-
 #include "device/device.h"
 #include "device/device_web_server.h"
 #include "device/device_global_variables.h"
+#include <SimpleFOCDrivers.h>
 
 void onWsEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType type, void *arg, uint8_t *data, size_t len);
 
