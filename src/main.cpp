@@ -14,6 +14,8 @@ void onWsEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventTyp
 AsyncWebServer ws_server(80);
 AsyncWebSocket ws("/ws");
 
+// # This bit needs I2Ccommander
+
 uint8_t uart_message[3] = {97, 0, 0};
 
 void setup()
