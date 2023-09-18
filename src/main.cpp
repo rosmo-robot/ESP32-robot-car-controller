@@ -3,41 +3,17 @@
 #include <WiFiClientSecure.h>
 #include <AsyncTCP.h>
 #include <ESPAsyncWebServer.h>
+
 #include "utility.h"
+
 #include "device/device.h"
 #include "device/device_web_server.h"
 #include "device/device_global_variables.h"
-#include <SimpleFOCDrivers.h>
-#include <Wire.h>
-#include <SimpleFOC.h>
-#include "SimpleFOCDrivers.h"
-#include "comms/i2c/I2CCommanderMaster.h"
-
-#define TARGET_I2C_ADDRESS 0x60
-I2CCommanderMaster commander; 0x60
-
-void setup() {
-    
-    // ...other setup code
-
-    Wire.setClock(400000);          // use same speed on target device!
-    Wire.begin();                   // initialize i2c in controller mode
-    commander.addI2CMotors(TARGET_I2C_ADDRESS, 1);            // add target device, it has 1 motor
-    //commander.addI2CMotors(TARGET_I2C_ADDRESS2, 1);         // you could add another target device on the same bus
-    //commander.addI2CMotors(TARGET_I2C_ADDRESS, 1, &wire2);  // or on a different i2c bus
-    commander.init();               // init commander
-    Wire.onReceive(onReceive);      // connect the interrupt handlers
-    Wire.onRequest(onRequest);
-
-}
-
 
 void onWsEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType type, void *arg, uint8_t *data, size_t len);
 
 AsyncWebServer ws_server(80);
 AsyncWebSocket ws("/ws");
-
-// # This bit needs I2Ccommander
 
 uint8_t uart_message[3] = {97, 0, 0};
 
